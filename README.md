@@ -69,6 +69,7 @@ Este projeto consiste em uma aplicação web para diagnóstico de qualidade do s
     ```
 3. Acesse o frontend abrindo o navegador na seguinte URL:
 4. http://localhost:5500
+   
 5. ### Rodando o Backend
 6. Navegue até a pasta do backend onde está o arquivo `app.py`.
 
@@ -81,7 +82,7 @@ Este projeto consiste em uma aplicação web para diagnóstico de qualidade do s
     python app.py
     ```
 8. O servidor Flask vai rodar na porta `5000` por padrão. A API estará disponível em:
-9. http://localhost:5000
+9.  http://localhost:5000
 10. ### Testando a Aplicação
 11. Preencha o formulário com os dados solicitados e clique no botão "Enviar".
 12. A aplicação vai fazer uma previsão sobre a qualidade do sono baseada nos dados fornecidos.

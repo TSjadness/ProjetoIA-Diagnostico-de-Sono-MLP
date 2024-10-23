@@ -1,3 +1,4 @@
+/* Estilos gerais da página */
 html,
 body {
   font-family: "Roboto", sans-serif;
@@ -6,6 +7,7 @@ body {
   padding: 0;
 }
 
+/* Header */
 .container-header {
   max-width: 100%;
   height: 200px;
@@ -15,11 +17,13 @@ body {
   align-items: center;
   margin-top: 0;
 }
+
 .text-header {
   color: white;
   font-size: 30px;
 }
 
+/* Container principal */
 .container {
   z-index: 1;
   position: relative;
@@ -28,11 +32,11 @@ body {
   margin: auto;
   background: #fff;
   padding: 4rem 4rem 1rem 4rem;
-
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos do formulário */
 #sleepForm input {
   width: calc(100% - 20px);
   padding: 10px;
@@ -63,27 +67,29 @@ body {
 #result {
   margin: 20px 0;
   font-size: 20px;
+  font-weight: bold;
   padding: 10px;
   border-radius: 4px solid #2496fc;
   background-color: #f4f4f4;
-  border-left: 4px solid #2496fc;
 }
+
+/* Estilo do label flutuante */
 .label-float {
   position: relative;
   padding-top: 13px;
+  display: flex;
+  align-items: center;
 }
 
 .label-float input {
+  width: 100%;
+  padding: 15px 40px 15px 20px; /* Espaço à direita para o ícone */
   border: 1px solid lightgrey;
   border-radius: 5px;
   outline: none;
-  min-width: 250px;
-  padding: 15px 20px;
   font-size: 16px;
   transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 .label-float input:focus {
@@ -98,18 +104,16 @@ body {
   pointer-events: none;
   position: absolute;
   top: calc(50% - 8px);
-  left: 15px;
+  left: 20px;
   transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
   background-color: white;
-  padding: 5px;
-  box-sizing: border-box;
+  padding: 0 5px;
 }
 
 .label-float input:required:invalid + label:before {
   content: "* ";
 }
+
 .label-float input:focus + label,
 .label-float input:not(:placeholder-shown) + label {
   font-size: 13px;
@@ -117,6 +121,64 @@ body {
   color: black;
 }
 
+/* Estilo do ícone de ajuda posicionado à direita */
+.label-float .icon-help {
+  position: absolute;
+  right: 32px;
+  top: 58%;
+  transform: translateY(-50%);
+  color: #888;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Efeito hover no ícone */
+.label-float .icon-help:hover i {
+  color: #2496fc;
+}
+
+/* Tooltip */
+.label-float .icon-help::after {
+  content: attr(data-tooltip); /* Usa o valor do atributo data-tooltip */
+  position: absolute;
+  bottom: 125%; /* Ajuste a posição */
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Pequena seta na tooltip */
+.label-float .icon-help::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  right: 50%;
+  transform: translateX(50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Mostrar tooltip no hover */
+.label-float .icon-help:hover::after,
+.label-float .icon-help:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Estilos da caixa de carregamento */
 .box {
   width: 100%;
   height: 100%;
@@ -125,6 +187,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .box button {
   margin-top: 2rem;
   width: 100%;
@@ -135,6 +198,63 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .box button:hover {
   background-color: #025096;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-fill {
+  width: 0;
+  height: 100%;
+  background-color: #2496fc;
+  animation: loading 2s infinite;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/* Mensagem de carregamento */
+#loadingMessage p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bolder;
+  color: #333;
+  margin-top: 10px;
+  animation: fadeInOut 2s infinite, slideIn 1s ease-out;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }

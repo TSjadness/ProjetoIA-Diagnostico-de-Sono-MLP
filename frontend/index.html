@@ -9,6 +9,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
@@ -26,6 +30,9 @@
               required
             />
             <label for="age">Idade</label>
+            <span class="icon-help" data-tooltip="Idade em anos (inteiro).">
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
 
           <div class="label-float">
@@ -86,13 +93,33 @@
             <label for="sleep_duration">Duração do Sono:</label>
           </div>
 
+          <!-- <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              id="physical_activity"
+              required
+            />
+            <label for="physical_activity">Atividade Física (minutos)</label>
+            <i
+              class="fa fa-question-circle"
+              title="Média de minutos gastos em atividade física por dia."
+            ></i>
+          </div> -->
+
           <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
 
         <div id="loadingMessage" style="display: none">
-          Processando dados, por favor aguarde...
+          <div class="loading-bar">
+            <div class="loading-fill"></div>
+          </div>
+          <p class="loading-text">Processando dados, por favor aguarde...</p>
         </div>
+
         <div id="result"></div>
+
         <div class="box">
           <canvas id="sleepChart"></canvas>
           <button
@@ -107,5 +134,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </body>
 </html>

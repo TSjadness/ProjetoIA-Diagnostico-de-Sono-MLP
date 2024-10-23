@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnóstico de Sono</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <h2 class="text-header container-header">Diagnóstico de Sono</h2>
+      <div class="container mt-5">
+        <form id="sleepForm">
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              id="age"
+              required
+            />
+            <label for="age">Idade</label>
+          </div>
+
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              type="number"
+              class="form-control"
+              id="study_hours"
+              required
+            />
+            <label for="study_hours">Horas de Estudo:</label>
+          </div>
+
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              class="form-control"
+              id="screen_time"
+              required
+            />
+            <label for="screen_time">Tempo de Tela:</label>
+          </div>
+
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              id="caffeine_intake"
+              required
+            />
+            <label for="caffeine_intake">Ingestão de Cafeína:</label>
+          </div>
+
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              id="physical_activity"
+              required
+            />
+            <label for="physical_activity">Atividade Física (minutos):</label>
+          </div>
+
+          <div class="label-float">
+            <input
+              type="number"
+              placeholder=" "
+              class="form-control"
+              id="sleep_duration"
+              required
+            />
+            <label for="sleep_duration">Duração do Sono:</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+        <div id="loadingMessage" style="display: none">
+          Processando dados, por favor aguarde...
+        </div>
+        <div id="result"></div>
+        <div class="box">
+          <canvas id="sleepChart"></canvas>
+          <button
+            id="exportButton"
+            style="display: none"
+            class="btn btn-success"
+          >
+            Exportar como Imagem
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

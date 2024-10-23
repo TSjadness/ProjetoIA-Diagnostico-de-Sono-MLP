@@ -1,0 +1,140 @@
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f2f8fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container-header {
+  max-width: 100%;
+  height: 200px;
+  background: #2496fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+.text-header {
+  color: white;
+  font-size: 30px;
+}
+
+.container {
+  z-index: 1;
+  position: relative;
+  top: -5rem;
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  padding: 4rem 4rem 1rem 4rem;
+
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#sleepForm input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+#sleepForm label {
+  font-size: 18px;
+  font-weight: semi-bold;
+}
+
+#sleepForm button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2496fc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#sleepForm button:hover {
+  background-color: #025096;
+}
+
+#result {
+  margin: 20px 0;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 4px solid #2496fc;
+  background-color: #f4f4f4;
+  border-left: 4px solid #2496fc;
+}
+.label-float {
+  position: relative;
+  padding-top: 13px;
+}
+
+.label-float input {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  outline: none;
+  min-width: 250px;
+  padding: 15px 20px;
+  font-size: 16px;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-appearance: none;
+}
+
+.label-float input:focus {
+  border: 2px solid #3951b2;
+}
+
+.label-float input::placeholder {
+  color: transparent;
+}
+
+.label-float label {
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 15px;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.label-float input:required:invalid + label:before {
+  content: "* ";
+}
+.label-float input:focus + label,
+.label-float input:not(:placeholder-shown) + label {
+  font-size: 13px;
+  top: 0;
+  color: black;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.box button {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 10px;
+  background-color: #2496fc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.box button:hover {
+  background-color: #025096;
+}

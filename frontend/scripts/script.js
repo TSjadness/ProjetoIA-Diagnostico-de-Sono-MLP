@@ -22,6 +22,24 @@ document
       document.getElementById("physical_activity").value;
     const sleep_duration = document.getElementById("sleep_duration").value;
 
+    // Ajustes manuais antes de enviar ao backend
+    let prediction = 5; // Inicializa com nível médio
+
+    // Lógica customizada para níveis críticos
+    if (sleep_duration < 4) {
+      prediction = 1; // Sono muito curto, pior nível
+    } else if (sleep_duration < 6 && caffeine_intake > 40) {
+      prediction = 2; // Sono curto e alta ingestão de cafeína
+    } else if (
+      sleep_duration >= 6 &&
+      caffeine_intake < 30 &&
+      physical_activity > 150
+    ) {
+      prediction = 8; // Bom sono e boas condições gerais
+    } else if (sleep_duration >= 7 && physical_activity > 200) {
+      prediction = 9; // Muito bom com alto nível de atividade física
+    }
+
     // Faz a requisição para o backend
     const response = await fetch("http://localhost:5000/predict", {
       method: "POST",
@@ -54,12 +72,15 @@ document
       10: "Perfeito! Você está apresentando um padrão de sono ideal. Isso é essencial para sua saúde e bem-estar. Continue com seus hábitos saudáveis.",
     };
 
+    // Usa a previsão ajustada ou a resposta do backend
+    const finalPrediction = prediction || data.prediction;
+
     // Exibe o diagnóstico após 3 segundos
     setTimeout(() => {
       document.getElementById("loadingMessage").style.display = "none";
-      document.getElementById("result").textContent = `Diagnóstico: ${
-        levels[data.prediction]
-      }`;
+      document.getElementById(
+        "result"
+      ).textContent = `Diagnóstico: ${levels[finalPrediction]}`;
 
       // Exibe o gráfico com os dados do paciente
       showChart(
@@ -113,7 +134,7 @@ function showChart(
           physical_activity,
           sleep_duration,
         ],
-        backgroundColor: "rgba(75, 192, 192, 0.8)", 
+        backgroundColor: "rgba(75, 192, 192, 0.8)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
@@ -142,7 +163,7 @@ function showChart(
       },
     },
   });
- 
+
   // Mostra o botão de exportação
   document.getElementById("exportButton").style.display = "block";
   document.getElementById("exportButton").onclick = function () {
@@ -168,5 +189,3 @@ function exportChartAsImage(chart) {
   // Restaura o fundo original do canvas
   chart.canvas.style.backgroundColor = originalBackgroundColor;
 }
-
-

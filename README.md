@@ -14,11 +14,11 @@ Este projeto consiste em uma aplicação web interativa que realiza o diagnósti
   - [Funcionalidades](#funcionalidades)
   - [Estrutura do Projeto](#estrutura-do-projeto)
     - [Estrutura de Pastas (Exemplo)](#estrutura-de-pastas-exemplo)
-  - [Requisitos](#requisitos)
     - [Software:](#software)
     - [Dependências Python:](#dependências-python)
   - [Instalação](#instalação)
   - [Como Rodar o Projeto](#como-rodar-o-projeto)
+  - [Ambiente Virtual (venv)](#ambiente-virtual-venv)
     - [Rodando o Frontend](#rodando-o-frontend)
     - [Rodando o Backend](#rodando-o-backend)
     - [Testando a Aplicação](#testando-a-aplicação)
@@ -49,7 +49,7 @@ Este projeto consiste em uma aplicação web interativa que realiza o diagnósti
 - **Frontend**: Implementado em HTML, CSS e JavaScript, responsável pela interface do usuário e exibição dos resultados.
 - **Backend**: Implementado em Python com Flask, responsável por processar os dados e executar os cálculos necessários para a previsão da qualidade do sono.
 - **Gráficos**: Utilização da biblioteca Chart.js para visualização dos dados coletados e análise do padrão de sono.
-  
+
 ### Estrutura de Pastas (Exemplo)
 
 ```
@@ -62,7 +62,7 @@ Este projeto consiste em uma aplicação web interativa que realiza o diagnósti
 │   │   ├── script.js
 │   ├── styles
 │   │   ├── style.css
-│   ├── index.html 
+│   ├── index.html
 │
 ├── /backend                  # API e processamento (Python, Flask)
 │   ├── data
@@ -75,8 +75,6 @@ Este projeto consiste em uma aplicação web interativa que realiza o diagnósti
 ├── README.md                 # Documentação do projeto
 └── requirements.txt          # Dependências do backend
 ```
-
-## Requisitos
 
 ### Software:
 
@@ -113,6 +111,42 @@ As seguintes bibliotecas Python são necessárias para o backend:
    ```
 
 ## Como Rodar o Projeto
+
+## Ambiente Virtual (venv)
+
+É recomendável usar um ambiente virtual para isolar as dependências do projeto. Para configurar um ambiente virtual, siga os passos abaixo:
+
+1. **Crie um ambiente virtual**:
+
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Ative o ambiente virtual**:
+
+   - No Windows:
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   - No macOS/Linux:
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+3. **Instale as dependências no ambiente virtual**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Para desativar o ambiente virtual**:
+
+   ```bash
+   deactivate
+   ```
 
 ### Rodando o Frontend
 
@@ -174,4 +208,3 @@ Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](L
 - **Jadson Tavares Santos**: [GitHub](https://github.com/TSjadness)
 
 ---
-

@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # Importa o CORS
 import pandas as pd
 import joblib
-from model import predict_sleep_pattern
+from models.model import predict_sleep_pattern
 
 app = Flask(__name__)
 CORS(app)  # Habilita CORS para todas as rotas

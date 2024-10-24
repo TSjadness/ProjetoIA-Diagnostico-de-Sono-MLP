@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 
 # Carregando os dados
-data = pd.read_csv('student_sleep_patterns.csv')
+data = pd.read_csv('data/student_sleep_patterns.csv')
 
 # Selecionando as features (variáveis independentes)
 X = data[['Age', 'Study_Hours', 'Screen_Time', 'Caffeine_Intake', 'Physical_Activity', 'Sleep_Duration']]

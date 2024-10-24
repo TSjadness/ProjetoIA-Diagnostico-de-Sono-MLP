@@ -113,7 +113,7 @@ function showChart(
           physical_activity,
           sleep_duration,
         ],
-        backgroundColor: "rgba(75, 192, 192, 0.8)", // Aumenta a opacidade
+        backgroundColor: "rgba(75, 192, 192, 0.8)", 
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
@@ -142,7 +142,7 @@ function showChart(
       },
     },
   });
-
+ 
   // Mostra o botão de exportação
   document.getElementById("exportButton").style.display = "block";
   document.getElementById("exportButton").onclick = function () {
@@ -168,3 +168,5 @@ function exportChartAsImage(chart) {
   // Restaura o fundo original do canvas
   chart.canvas.style.backgroundColor = originalBackgroundColor;
 }
+
+

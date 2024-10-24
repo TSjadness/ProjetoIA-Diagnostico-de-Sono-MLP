@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -46,6 +46,12 @@
               required
             />
             <label for="study_hours">Horas de Estudo:</label>
+            <span
+              class="icon-help"
+              data-tooltip="Média de horas gastas estudando por dia"
+            >
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
 
           <div class="label-float">
@@ -58,6 +64,12 @@
               required
             />
             <label for="screen_time">Tempo de Tela:</label>
+            <span
+              class="icon-help"
+              data-tooltip="Média de horas gastas em telas"
+            >
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
 
           <div class="label-float">
@@ -69,6 +81,10 @@
               required
             />
             <label for="caffeine_intake">Ingestão de Cafeína:</label>
+
+            <span class="icon-help" data-tooltip="Média de cafeína por dia.">
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
 
           <div class="label-float">
@@ -80,6 +96,12 @@
               required
             />
             <label for="physical_activity">Atividade Física (minutos):</label>
+            <span
+              class="icon-help"
+              data-tooltip="Média de minutos gastos em atividade física por dia."
+            >
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
 
           <div class="label-float">
@@ -91,22 +113,13 @@
               required
             />
             <label for="sleep_duration">Duração do Sono:</label>
+            <span
+              class="icon-help"
+              data-tooltip="Média de horas de sono por dia."
+            >
+              <i class="fa fa-question-circle"></i>
+            </span>
           </div>
-
-          <!-- <div class="label-float">
-            <input
-              type="number"
-              placeholder=" "
-              class="form-control"
-              id="physical_activity"
-              required
-            />
-            <label for="physical_activity">Atividade Física (minutos)</label>
-            <i
-              class="fa fa-question-circle"
-              title="Média de minutos gastos em atividade física por dia."
-            ></i>
-          </div> -->
 
           <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
@@ -121,7 +134,7 @@
         <div id="result"></div>
 
         <div class="box">
-          <canvas id="sleepChart"></canvas>
+          <canvas id="sleepChart" style="background: white"></canvas>
           <button
             id="exportButton"
             style="display: none"
@@ -133,7 +146,7 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="./scripts/script.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </body>
 </html>

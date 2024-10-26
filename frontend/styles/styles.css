@@ -67,6 +67,31 @@ button {
   background-color: #025096;
 }
 
+#sleepForm select {
+  width: 100%;
+  padding: 10px; 
+  margin: 10px 0; 
+  border: 1px solid black;
+  border-radius: 4px; 
+  outline: none; 
+  font-size: 16px; 
+  transition: border 0.1s linear; 
+}
+
+#sleepForm select:focus {
+  border: 1px solid black; 
+}
+
+/* Estilos do label do select */
+.label-float select:focus + label,
+.label-float select:not(:placeholder-shown) + label {
+  font-size: 13px; 
+  top: 0; 
+  color: black; 
+}
+
+
+
 #result {
   margin: 20px 0;
   font-size: 20px;

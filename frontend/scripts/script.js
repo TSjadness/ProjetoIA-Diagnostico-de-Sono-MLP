@@ -1,191 +1,84 @@
-let myChart; // Variável global para armazenar o gráfico
+document.getElementById('sleepForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Previne o comportamento padrão de envio do formulário
 
-document
-  .getElementById("sleepForm")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    const form = document.getElementById("sleepForm");
-
-    // Mostra mensagem de "processando dados"
-    document.getElementById("loadingMessage").style.display = "block";
-    document.getElementById("result").textContent = "";
-    document.getElementById("sleepChart").style.display = "none"; // Esconde o gráfico
-    document.getElementById("exportButton").style.display = "none"; // Esconde o botão de exportação
+    // Mostra a mensagem de carregamento
+    document.getElementById('loadingMessage').style.display = 'block';
+    document.getElementById('result').innerText = ''; // Limpa o resultado anterior
 
     // Coleta os dados do formulário
-    const age = document.getElementById("age").value;
-    const study_hours = document.getElementById("study_hours").value;
-    const screen_time = document.getElementById("screen_time").value;
-    const caffeine_intake = document.getElementById("caffeine_intake").value;
-    const physical_activity =
-      document.getElementById("physical_activity").value;
-    const sleep_duration = document.getElementById("sleep_duration").value;
-
-    // Ajustes manuais antes de enviar ao backend
-    let prediction = 5; // Inicializa com nível médio
-
-    // Lógica customizada para níveis críticos
-    if (sleep_duration < 4) {
-      prediction = 1; // Sono muito curto, pior nível
-    } else if (sleep_duration < 6 && caffeine_intake > 40) {
-      prediction = 2; // Sono curto e alta ingestão de cafeína
-    } else if (
-      sleep_duration >= 6 &&
-      caffeine_intake < 30 &&
-      physical_activity > 150
-    ) {
-      prediction = 8; // Bom sono e boas condições gerais
-    } else if (sleep_duration >= 7 && physical_activity > 200) {
-      prediction = 9; // Muito bom com alto nível de atividade física
-    }
-
-    // Faz a requisição para o backend
-    const response = await fetch("http://localhost:5000/predict", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Age: age,
-        Study_Hours: study_hours,
-        Screen_Time: screen_time,
-        Caffeine_Intake: caffeine_intake,
-        Physical_Activity: physical_activity,
-        Sleep_Duration: sleep_duration,
-      }),
-    });
-
-    const data = await response.json();
-
-    // Níveis de diagnóstico
-    const levels = {
-      1: "Infelizmente, seu padrão de sono está muito pobre. É importante que consideremos algumas estratégias para melhorar sua qualidade de descanso.",
-      2: "Seu sono é considerado pobre. Recomendo avaliar fatores que possam estar contribuindo para isso e, se necessário, buscaremos orientações mais específicas.",
-      3: "O seu sono está em um nível regular. Embora não seja alarmante, é desejável que exploremos maneiras de aprimorar a qualidade do seu descanso.",
-      4: "Seu padrão de sono está abaixo da média. Vamos trabalhar juntos para identificar mudanças que podem ajudá-lo a alcançar uma melhor qualidade de sono.",
-      5: "Seu sono é considerado médio. É um bom ponto de partida, mas podemos fazer ajustes que podem levar a uma melhora significativa.",
-      6: "Você apresenta um padrão de sono acima da média. É um bom sinal, mas sempre há espaço para melhorias que podem contribuir para seu bem-estar geral.",
-      7: "Seu sono está em um nível bom. Continue mantendo hábitos saudáveis, pois isso é fundamental para a sua saúde.",
-      8: "Muito bom! Seu padrão de sono é satisfatório. Continue seguindo as recomendações de saúde para manter essa qualidade.",
-      9: "Excelente! Seu sono é de alta qualidade, o que é benéfico para sua saúde física e mental. Continue assim!",
-      10: "Perfeito! Você está apresentando um padrão de sono ideal. Isso é essencial para sua saúde e bem-estar. Continue com seus hábitos saudáveis.",
+    const data = {
+        Age: parseInt(document.getElementById('age').value),
+        Study_Hours: parseFloat(document.getElementById('study_hours').value),
+        Screen_Time: parseFloat(document.getElementById('screen_time').value),
+        Caffeine_Intake: parseInt(document.getElementById('caffeine_intake').value),
+        Physical_Activity: parseInt(document.getElementById('physical_activity').value),
+        Sleep_Duration: parseFloat(document.getElementById('sleep_duration').value),
+        Gender: document.getElementById('gender').value === "Male" ? 0 : 
+                document.getElementById('gender').value === "Female" ? 1 : 2 // Mapeia gênero
     };
 
-    // Usa a previsão ajustada ou a resposta do backend
-    const finalPrediction = prediction || data.prediction;
+    try {
+        const response = await fetch('http://localhost:5000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-    // Exibe o diagnóstico após 3 segundos
-    setTimeout(() => {
-      document.getElementById("loadingMessage").style.display = "none";
-      document.getElementById(
-        "result"
-      ).textContent = `Diagnóstico: ${levels[finalPrediction]}`;
+        if (!response.ok) {
+            throw new Error('Erro ao fazer a previsão');
+        }
 
-      // Exibe o gráfico com os dados do paciente
-      showChart(
-        age,
-        study_hours,
-        screen_time,
-        caffeine_intake,
-        physical_activity,
-        sleep_duration
-      );
+        const result = await response.json();
+        
+        // Exibe a predição
+        document.getElementById('result').innerText = `Predição: ${result.prediction}`;
 
-      // Limpa os campos do formulário após a exibição do resultado
-      form.reset();
-    }, 3000); // Atraso de 3 segundos
-  });
+        // Aqui você pode adicionar código para renderizar o gráfico no canvas
+        renderChart(result.prediction); // Supondo que você tenha essa função
 
-// Função para exibir o gráfico
-function showChart(
-  age,
-  study_hours,
-  screen_time,
-  caffeine_intake,
-  physical_activity,
-  sleep_duration
-) {
-  const ctx = document.getElementById("sleepChart").getContext("2d");
+    } catch (error) {
+        document.getElementById('result').innerText = `Erro: ${error.message}`;
+    } finally {
+        // Esconde a mensagem de carregamento
+        document.getElementById('loadingMessage').style.display = 'none';
+    }
+});
 
-  // Destroi o gráfico anterior, se existir
-  if (myChart) {
-    myChart.destroy();
-  }
-
-  // Dados para o gráfico
-  const chartData = {
-    labels: [
-      "Idade",
-      "Horas de Estudo",
-      "Tempo de Tela",
-      "Ingestão de Cafeína",
-      "Atividade Física",
-      "Duração do Sono",
-    ],
-    datasets: [
-      {
-        label: "Dados do Paciente",
-        data: [
-          age,
-          study_hours,
-          screen_time,
-          caffeine_intake,
-          physical_activity,
-          sleep_duration,
-        ],
-        backgroundColor: "rgba(75, 192, 192, 0.8)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  // Criação do gráfico
-  myChart = new Chart(ctx, {
-    type: "bar",
-    data: chartData,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: "Valores",
-          },
+// Função para renderizar o gráfico (exemplo)
+function renderChart(prediction) {
+    const ctx = document.getElementById('sleepChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar', // ou 'line', dependendo do que você quiser
+        data: {
+            labels: ['Predição de Qualidade do Sono'],
+            datasets: [{
+                label: 'Predição',
+                data: [prediction],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
         },
-        x: {
-          title: {
-            display: true,
-            text: "Aspectos",
-          },
-        },
-      },
-    },
-  });
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
-  // Mostra o botão de exportação
-  document.getElementById("exportButton").style.display = "block";
-  document.getElementById("exportButton").onclick = function () {
-    exportChartAsImage(myChart);
-  };
-
-  // Exibe o gráfico
-  document.getElementById("sleepChart").style.display = "block";
+    // Mostra o botão de exportação
+    document.getElementById('exportButton').style.display = 'block';
+    
+    // Adiciona a funcionalidade de exportação
+    document.getElementById('exportButton').onclick = function() {
+        const link = document.createElement('a');
+        link.href = chart.toBase64Image();
+        link.download = 'sleep_quality_prediction.png';
+        link.click();
+    };
 }
 
-// Função para exportar o gráfico como imagem
-function exportChartAsImage(chart) {
-  // Altera o fundo do canvas para branco
-  const originalBackgroundColor = chart.canvas.style.backgroundColor;
-  chart.canvas.style.backgroundColor = "white";
-
-  const imgURI = chart.toBase64Image();
-  const link = document.createElement("a");
-  link.download = "grafico_dados_paciente.png";
-  link.href = imgURI;
-  link.click();
-
-  // Restaura o fundo original do canvas
-  chart.canvas.style.backgroundColor = originalBackgroundColor;
-}

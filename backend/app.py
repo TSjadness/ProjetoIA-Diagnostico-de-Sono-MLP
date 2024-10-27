@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Inicializando o modelo
-model = SleepQualityModel(data_path='data/student_sleep_patterns.csv')
+model = SleepQualityModel(data_path='./data/student_sleep_patterns.csv')
 model.train()  # Treine o modelo ao iniciar
 model.save_model()  # Salve o modelo treinado
 

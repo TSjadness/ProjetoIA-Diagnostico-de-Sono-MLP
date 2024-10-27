@@ -1,7 +1,7 @@
 from models.model import SleepQualityModel
 
 # Crie caminho para os dados
-model = SleepQualityModel(data_path='data/student_sleep_patterns.csv')
+model = SleepQualityModel(data_path='./data/student_sleep_patterns.csv')
 
 # Treine o modelo
 model.train()
